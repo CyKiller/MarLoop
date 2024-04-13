@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/_head.ejs') %>
+    <title>Book Projects - MarLoop</title>
+</head>
+<body>
+    <%- include('partials/_header.ejs') %>
+    <div class="container mt-5">
+        <h1>Your Book Projects</h1>
+        <% if (bookProjects.length > 0) { %>
+            <div class="list-group">
+                <% bookProjects.forEach(function(bookProject) { %>
+                    <a href="/book-project/<%= bookProject._id %>" class="list-group-item list-group-item-action">
+                        <h5 class="mb-1"><%= bookProject.title %></h5>
+                        <p class="mb-1">Genre: <%= bookProject.genre %></p>
+                        <% if (bookProject.updatedAt) { %>
+                            <small>Last updated on <%= bookProject.updatedAt.toDateString() %></small>
+                        <% } else { %>
+                            <small>Last updated on: Not available</small>
+                        <% } %>
+                    </a>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p>You have not created any book projects yet.</p>
+        <% } %>
+        <a href="/dashboard" class="btn btn-primary mt-3">Back to Dashboard</a>
+    </div>
+    <%- include('partials/_footer.ejs') %>
+    <script>
+        // Add any JavaScript needed for handling form submissions or interactions here
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: npm install
+    - name: Run Jest Tests
+      run: npm run test
+    - name: Setup Cypress
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 60
+        command: npm run cypress:run
+        browser: chrome
+        config: video=false
+        env: 
+          NODE_ENV: test
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}

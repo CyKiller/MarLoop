@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/_head.ejs') %>
+    <title>Book Project Details - MarLoop</title>
+</head>
+<body>
+    <%- include('partials/_header.ejs') %>
+    <div class="container mt-5">
+        <h1>Book Project Details</h1>
+        <div class="book-info">
+            <p><strong>Title:</strong> <%= bookProject.title %></p>
+            <p><strong>Genre:</strong> <%= bookProject.genre %></p>
+            <p><strong>Current State:</strong> <%= bookProject.currentState.plotContent %></p>
+            <p><strong>Last Updated:</strong> <%= bookProject.updatedAt.toDateString() %></p>
+            <% if (bookProject.collaborators.length > 0) { %>
+                <p><strong>Collaborators:</strong> 
+                    <%= bookProject.collaborators.map(collaborator => collaborator.username).join(', ') %>
+                </p>
+            <% } else { %>
+                <p><strong>Collaborators:</strong> None</p>
+            <% } %>
+        </div>
+        <a href="/dashboard" class="btn btn-primary mt-3">Back to Dashboard</a>
+    </div>
+    <%- include('partials/_footer.ejs') %>
+    <script>
+        console.log('Rendering book project details page.');
+    </script>
+</body>
+</html>
