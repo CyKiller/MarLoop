@@ -7,16 +7,17 @@ const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const flash = require('connect-flash');
 const http = require('http');
+const cors = require('cors'); // Added for CORS support
 const authRoutes = require("./routes/authRoutes");
-const bookRoutes = require("./routes/bookRoutes"); // Added import for bookRoutes
-const plotBranchRoutes = require('./routes/plotBranchRoutes'); // Import plotBranchRoutes
-const userRoutes = require('./routes/userRoutes'); // Import userRoutes
-const cleanupJobs = require('./utilities/cleanupJobs'); // Import cleanup jobs
-const { ensureAuthenticated } = require('./routes/middleware/authMiddleware'); // Import ensureAuthenticated middleware
-const initSocketServer = require('./utilities/socketServer'); // Import WebSocket server initializer
+const bookRoutes = require("./routes/bookRoutes");
+const plotBranchRoutes = require('./routes/plotBranchRoutes');
+const userRoutes = require('./routes/userRoutes');
+const cleanupJobs = require('./utilities/cleanupJobs');
+const { ensureAuthenticated } = require('./routes/middleware/authMiddleware');
+const initSocketServer = require('./utilities/socketServer');
 
 // Passport Config
-require('./config/passportConfig')(passport); // Ensure this file is created as per instructions
+require('./config/passportConfig')(passport);
 
 if (!process.env.DATABASE_URL || !process.env.SESSION_SECRET) {
   console.error("Error: config environment variables not set. Please create/edit .env configuration file.");
@@ -29,6 +30,9 @@ const port = process.env.PORT || 3000;
 // Middleware to parse request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Enabling CORS for all requests
+app.use(cors());
 
 // Setting the templating engine to EJS
 app.set("view engine", "ejs");
@@ -99,13 +103,13 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 
 // Book Routes
-app.use(bookRoutes); // Using bookRoutes in the application
+app.use(bookRoutes);
 
 // Plot Branch Routes
-app.use(plotBranchRoutes); // Using plotBranchRoutes in the application
+app.use(plotBranchRoutes);
 
 // User Routes
-app.use(userRoutes); // Using userRoutes in the application
+app.use(userRoutes);
 
 // Root path response
 app.get("/", (req, res) => {
@@ -118,7 +122,7 @@ app.get("/", (req, res) => {
 
 // Dashboard route for authenticated users
 app.get("/dashboard", ensureAuthenticated, (req, res) => {
-  res.render("dashboard"); // Assuming 'dashboard.ejs' exists and is properly set up
+  res.render("dashboard");
 });
 
 // If no routes handled the request, it's a 404
