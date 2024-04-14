@@ -1,0 +1,21 @@
+/* This CSS file is intended for styling the HeaderComponent. */
+
+.navbar {
+  width: 100%;
+  background-color: #343a40; /* Dark background color */
+}
+
+.navbar-brand {
+  color: #ffffff !important; /* Ensures the brand text is white */
+}
+
+.nav-link {
+  color: #ffffff !important; /* Ensures the navigation links are white */
+}
+
+/* Adjusts the navbar's padding and margin for better alignment and spacing */
+.navbar-nav {
+  margin-left: auto;
+}
+
+/* Additional styles can be added below as needed */
