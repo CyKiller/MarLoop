@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, FlexLayoutModule]
 })
 export class HeaderComponent {
   isExpanded = false;

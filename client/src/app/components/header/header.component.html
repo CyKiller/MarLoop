@@ -1,16 +1,16 @@
 <div class="header-container" fxLayout="row" fxLayoutAlign="space-between center">
-  <a href="/" class="navbar-brand">MarLoop</a>
+  <a routerLink="/" class="navbar-brand">MarLoop</a>
   <div fxLayout="row" fxLayoutGap="10px" [fxShow]="!isExpanded" fxHide.xs="true">
-    <a href="/" class="nav-link">Home</a>
-    <a href="/auth/login" class="nav-link">Login</a>
-    <a href="/books" class="nav-link">List Books</a>
+    <a routerLink="/" class="nav-link">Home</a>
+    <a routerLink="/auth/login" class="nav-link">Login</a>
+    <a routerLink="/books" class="nav-link">List Books</a>
   </div>
   <button class="navbar-toggler" type="button" (click)="isExpanded = !isExpanded" [attr.aria-expanded]="isExpanded" aria-controls="navbarNav" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div *ngIf="isExpanded" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="mobile-nav" id="navbarNav">
-    <a href="/" class="nav-link">Home</a>
-    <a href="/auth/login" class="nav-link">Login</a>
-    <a href="/books" class="nav-link">List Books</a>
+    <a routerLink="/" class="nav-link">Home</a>
+    <a routerLink="/auth/login" class="nav-link">Login</a>
+    <a routerLink="/books" class="nav-link">List Books</a>
   </div>
 </div>
