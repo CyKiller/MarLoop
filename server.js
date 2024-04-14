@@ -8,6 +8,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const http = require('http');
 const cors = require('cors'); // Added for CORS support
+const path = require('path'); // Required for serving Angular static files
 const authRoutes = require("./routes/authRoutes");
 const bookRoutes = require("./routes/bookRoutes");
 const plotBranchRoutes = require('./routes/plotBranchRoutes');
@@ -111,18 +112,30 @@ app.use(plotBranchRoutes);
 // User Routes
 app.use(userRoutes);
 
-// Root path response
+// Serve Angular application static files
+app.use(express.static(path.join(__dirname, './client/dist/client')));
+
+// Root path and Dashboard route for authenticated users
 app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
-    res.redirect("/dashboard");
+    res.sendFile(path.join(__dirname, './client/dist/client/index.html'));
   } else {
-    res.render("index");
+    res.redirect("/auth/login");
   }
 });
 
-// Dashboard route for authenticated users
 app.get("/dashboard", ensureAuthenticated, (req, res) => {
-  res.render("dashboard");
+  res.sendFile(path.join(__dirname, './client/dist/client/index.html'));
+});
+
+// Catch-all route to serve Angular application for non-API requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/dist/client/index.html'), (err) => {
+    if (err) {
+      console.error('Error serving Angular app index.html:', err);
+      res.status(500).send('Error serving application.');
+    }
+  });
 });
 
 // If no routes handled the request, it's a 404
