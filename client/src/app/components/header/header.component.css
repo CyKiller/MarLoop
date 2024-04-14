@@ -1,6 +1,11 @@
-/* This CSS file is intended for styling the HeaderComponent. */
+/* This CSS file uses Flexbox for a responsive header layout. */
 
-.navbar {
+.header-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
   width: 100%;
   background-color: #343a40; /* Dark background color */
 }
@@ -13,9 +18,22 @@
   color: #ffffff !important; /* Ensures the navigation links are white */
 }
 
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
 /* Adjusts the navbar's padding and margin for better alignment and spacing */
 .navbar-nav {
   margin-left: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* Additional styles can be added below as needed */

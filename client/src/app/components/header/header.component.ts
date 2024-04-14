@@ -7,7 +7,14 @@ import { Component } from '@angular/core';
   standalone: true
 })
 export class HeaderComponent {
+  isExpanded = false;
+
   constructor() {
     console.log('HeaderComponent initialized');
+  }
+
+  toggleExpansion() {
+    this.isExpanded = !this.isExpanded;
+    console.log(`Header menu expansion toggled: ${this.isExpanded}`);
   }
 }
