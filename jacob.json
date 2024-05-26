@@ -1,0 +1,32 @@
+{
+  "language": "JavaScript",
+  "installCommand": "npm install",
+  "formatCommand": "We are not sure, we never used it before. You can select the best for us. ",
+  "buildCommand": "npm run build",
+  "style": "CSS",
+  "iconSet": "React Feather",
+  "componentExamples": "/server.js",
+  "apiEndpointsExamples": "we don't have a src file yet - just CSS that we want to have as a REACT app",
+  "pageExamples": "/views/index.ejs",
+  "directories": {
+    "components": "/src/components",
+    "pages": "/src/pages",
+    "styles": "/public/css/",
+    "staticAssets": "/public/assets"
+  },
+  "stateManagement": {
+    "tool": "None"
+  },
+  "testing": {
+    "writeTests": true,
+    "testFramework": "Jest"
+  },
+  "storybook": {
+    "writeStories": true,
+    "storiesLocation": "/src/stories"
+  },
+  "envVariables": {
+    "exampleFile": "/.env.example"
+  },
+  "env": ""
+}
