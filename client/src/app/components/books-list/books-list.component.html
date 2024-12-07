@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <h2>Books List</h2>
+  <div *ngIf="books.length; else noBooksTemplate">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let book of books">
+        <h5>{{ book.title }}</h5>
+        <p>Author: {{ book.author }}</p>
+        <p>Genre: {{ book.genre }}</p>
+        <p>Published: {{ book.publishedDate | date }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noBooksTemplate>
+    <p>No books available. Please check back later.</p>
+  </ng-template>
+</div>
